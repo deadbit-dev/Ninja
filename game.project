@@ -13,4 +13,8 @@ input_method = HiddenInputField
 
 [project]
 title = Ninja
+dependencies#0 = https://github.com/britzl/defold-orthographic/archive/master.zip
+dependencies#1 = https://github.com/britzl/monarch/archive/master.zip
+dependencies#2 = https://github.com/Insality/druid/archive/master.zip
+dependencies#3 = https://github.com/indiesoftby/defold-hyper-trails/archive/master.zip
 
