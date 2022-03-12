@@ -1,4 +1,8 @@
-script: "/scripts/game/menu.gui_script"
+script: "/scripts/scenes/menu/menu.gui_script"
+fonts {
+  name: "ninja"
+  font: "/resources/fonts/ninja.font"
+}
 background_color {
   x: 0.0
   y: 0.0
