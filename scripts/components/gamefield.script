@@ -1,0 +1,5 @@
+local camera = require "orthographic.camera"
+
+function init(self)
+	pprint(camera.screen_to_world_bounds(hash("/camera")))
+end
