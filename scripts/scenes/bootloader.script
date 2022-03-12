@@ -1,6 +1,7 @@
 local monarch = require "monarch.monarch"
 
 function init(self)
+	msg.post("@render:", "use_fixed_fit_projection")
 	msg.post("#", "load_menu")
 end
 
