@@ -1,0 +1,11 @@
+local monarch = require "monarch.monarch"
+
+function init(self)
+	msg.post("#", "load_menu")
+end
+
+function on_message(self, message_id, message)
+	if message_id == hash("load_menu") then
+		monarch.show(hash("menu"))
+	end
+end
