@@ -1,23 +1,7 @@
 name: "default"
-scale_along_z: 0
-embedded_instances {
+instances {
   id: "bootloader"
-  data: "components {\n"
-  "  id: \"loader\"\n"
-  "  component: \"/scripts/scenes/bootloader.script\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  ""
+  prototype: "/components/bootloader.go"
   position {
     x: 0.0
     y: 0.0
@@ -35,6 +19,7 @@ embedded_instances {
     z: 1.0
   }
 }
+scale_along_z: 0
 embedded_instances {
   id: "popups"
   children: "gameover"
