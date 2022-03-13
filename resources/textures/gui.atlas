@@ -1,17 +1,17 @@
 images {
-  image: "/resources/textures/bg_game.png"
+  image: "/resources/textures/source/gui/bg_game.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/fruitsscore.png"
+  image: "/resources/textures/source/gui/fruitsscore.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/GUIButtonHome.png"
+  image: "/resources/textures/source/gui/GUIButtonHome.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/GUIButtonReset.png"
+  image: "/resources/textures/source/gui/GUIButtonReset.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
