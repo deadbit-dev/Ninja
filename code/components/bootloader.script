@@ -1,0 +1,16 @@
+local monarch = require "monarch.monarch"
+local config = require "code.config"
+local event_bus = require "code.modules.eventbus"
+
+function init(self)
+	msg.post("@render:", "use_fixed_fit_projection")
+
+	event_bus.subscribe(config.LOAD_SCENE, go.get_id())
+	event_bus.emit(config.LOAD_SCENE, {scene = config.GAME})
+end
+
+function on_message(self, message_id, message)
+	if message_id == config.LOAD_SCENE then
+		monarch.show(message.scene)
+	end
+end

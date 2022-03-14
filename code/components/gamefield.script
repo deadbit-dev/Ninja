@@ -1,0 +1,6 @@
+local camera = require "orthographic.camera"
+local config = require "code.config"
+
+function init(self)
+	pprint(camera.screen_to_world_bounds(config.CAMERA))
+end
