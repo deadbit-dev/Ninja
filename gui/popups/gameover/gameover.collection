@@ -4,7 +4,7 @@ embedded_instances {
   id: "go"
   data: "components {\n"
   "  id: \"monarch\"\n"
-  "  component: \"/popups/gameover/gameover.gui\"\n"
+  "  component: \"/gui/popups/gameover/gameover.gui\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -19,19 +19,19 @@ embedded_instances {
   "}\n"
   ""
   position {
-      x: 0.0
-      y: 0.0
-      z: 0.0
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   rotation {
-      x: 0.0
-      y: 0.0
-      z: 0.0
-      w: 1.0
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
   }
   scale3 {
-      x: 1.0
-      y: 1.0
-      z: 1.0
+    x: 1.0
+    y: 1.0
+    z: 1.0
   }
 }

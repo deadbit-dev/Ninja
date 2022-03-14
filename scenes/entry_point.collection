@@ -1,7 +1,7 @@
 name: "default"
 instances {
   id: "bootloader"
-  prototype: "/components/bootloader.go"
+  prototype: "/gameobjects/bootloader.go"
   position {
     x: 0.0
     y: 0.0
@@ -76,7 +76,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"collectionproxy\"\n"
   "  type: \"collectionproxy\"\n"
-  "  data: \"collection: \\\"/popups/gameover/gameover.collection\\\"\\n"
+  "  data: \"collection: \\\"/gui/popups/gameover/gameover.collection\\\"\\n"
   "exclude: false\\n"
   "\"\n"
   "  position {\n"
@@ -156,7 +156,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"collectionproxy\"\n"
   "  type: \"collectionproxy\"\n"
-  "  data: \"collection: \\\"/scenes/game/game.collection\\\"\\n"
+  "  data: \"collection: \\\"/scenes/game.collection\\\"\\n"
   "exclude: false\\n"
   "\"\n"
   "  position {\n"
@@ -214,7 +214,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"collectionproxy\"\n"
   "  type: \"collectionproxy\"\n"
-  "  data: \"collection: \\\"/scenes/menu/menu.collection\\\"\\n"
+  "  data: \"collection: \\\"/scenes/menu.collection\\\"\\n"
   "exclude: false\\n"
   "\"\n"
   "  position {\n"
