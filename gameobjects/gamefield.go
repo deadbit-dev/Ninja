@@ -1,6 +1,6 @@
 components {
-  id: "bootloader"
-  component: "/scripts/components/bootloader.script"
+  id: "gamefield"
+  component: "/code/components/gamefield.script"
   position {
     x: 0.0
     y: 0.0

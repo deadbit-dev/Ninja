@@ -1,6 +1,6 @@
 components {
   id: "spawner"
-  component: "/scripts/components/spawner.script"
+  component: "/code/components/spawner.script"
   position {
     x: 0.0
     y: 0.0
