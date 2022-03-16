@@ -1,16 +1,16 @@
 local monarch = require "monarch.monarch"
 local config = require "code.config"
-local EventBus = require "code.modules.eventbus"
+local EventBus = require "code.modules.utils.eventbus"
 
 function init(self)
 	msg.post("@render:", "use_fixed_fit_projection")
 
-	EventBus:subscribe(config.LOAD_SCENE, go.get_id())
-	EventBus:emit(config.LOAD_SCENE, {scene = config.GAME})
+	EventBus:subscribe(config.ON_LOAD_SCENE, go.get_id())
+	EventBus:emit(config.ON_LOAD_SCENE, {scene = config.GAME})
 end
 
 function on_message(self, message_id, message)
-	if message_id == config.LOAD_SCENE then
+	if message_id == config.ON_LOAD_SCENE then
 		monarch.show(message.scene)
 	end
 end

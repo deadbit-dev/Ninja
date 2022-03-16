@@ -1,4 +1,4 @@
-local class = require "code.modules.middleclass"
+local class = require "code.modules.utils.middleclass"
 local EventBus = class('EventBus')
 
 EventBus.static.event_storage = {}
