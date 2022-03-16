@@ -1,7 +1,7 @@
 name: "default"
 instances {
   id: "bootloader"
-  prototype: "/gameobjects/bootloader.go"
+  prototype: "/prefabs/bootloader.go"
   position {
     x: 0.0
     y: 0.0
