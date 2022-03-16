@@ -1,17 +1,18 @@
-local M = {}
+local class = require "code.modules.middleclass"
+local EventBus = class('EventBus')
 
-local event_storage = {}
+EventBus.static.event_storage = {}
 
-function M.subscribe(event, subscriber)
-  if not event_storage[event] then 
-    event_storage[event] = {}
+function EventBus.static:subscribe(event, subscriber)
+  if not EventBus.event_storage[event] then 
+    EventBus.event_storage[event] = {}
   end
 
-  table.insert(event_storage[event], subscriber)
+  table.insert(EventBus.event_storage[event], subscriber)
 end
 
-function M.unsubscribe(event, subscriber)
-  local subscribers = event_storage[event]
+function EventBus.static:unsubscribe(event, subscriber)
+  local subscribers = EventBus.event_storage[event]
   
   for index, value in ipairs(subscribers) do
     if value == subscriber then
@@ -20,12 +21,12 @@ function M.unsubscribe(event, subscriber)
   end
 end
 
-function M.emit(event, data)
-  local subscribers = event_storage[event]
+function EventBus.static:emit(event, data)
+  local subscribers = EventBus.event_storage[event]
 
   for _, subscriber in ipairs(subscribers) do
     msg.post(subscriber, event, data)
   end
 end
 
-return M
+return EventBus
