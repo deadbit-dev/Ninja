@@ -1,0 +1,6 @@
+local config = require "code.config"
+local EventBus = require "code.modules.utils.eventbus"
+
+function init(self)
+  EventBus:emit(config.ON_SPAWN_START)
+end
