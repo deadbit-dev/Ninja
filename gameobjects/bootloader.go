@@ -1,6 +1,6 @@
 components {
   id: "bootloader"
-  component: "/code/components/bootloader.script"
+  component: "/code/objects/bootloader.script"
   position {
     x: 0.0
     y: 0.0

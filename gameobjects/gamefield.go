@@ -1,6 +1,6 @@
 components {
   id: "gamefield"
-  component: "/code/components/gamefield.script"
+  component: "/code/objects/gamefield.script"
   position {
     x: 0.0
     y: 0.0
