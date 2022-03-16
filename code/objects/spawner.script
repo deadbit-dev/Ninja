@@ -5,8 +5,8 @@ local Spawner = require "code.modules.spawner"
 
 function init(self)
   self.instance = Spawner({
-    go.get_position("point"), 
-    go.get_position("point1")
+    go.get_position("pointOne"), 
+    go.get_position("pointTwo")
   })
 
   EventBus:subscribe(config.SPAWN_UNIT, go.get_id()) 
