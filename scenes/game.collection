@@ -39,9 +39,9 @@ instances {
     z: 1.0
   }
 }
-collection_instances {
-  id: "spawnzoneLeft"
-  collection: "/prefabs/spawnzone.collection"
+instances {
+  id: "spawner"
+  prototype: "/prefabs/spawner.go"
   position {
     x: 0.0
     y: 0.0
@@ -59,9 +59,9 @@ collection_instances {
     z: 1.0
   }
 }
-collection_instances {
-  id: "spawnzoneRight"
-  collection: "/prefabs/spawnzone.collection"
+instances {
+  id: "controller"
+  prototype: "/prefabs/controller.go"
   position {
     x: 0.0
     y: 0.0
