@@ -1,19 +1,31 @@
-local class = require "code.modules.middleclass"
+local class = require "code.modules.utils.middleclass"
 local config = require "code.config"
-local EventBus = require "code.modules.eventbus"
-local Spawner = require "code.modules.spawner"
+local EventBus = require "code.modules.utils.eventbus"
+local SpawnZone = require "code.modules.spawn.spawnzone"
+local SpawnPack = require "code.modules.spawn.spawnpack"
 
 function init(self)
-  self.instance = Spawner({
-    go.get_position("pointOne"), 
-    go.get_position("pointTwo")
-  })
+  local id = go.get_id()
+  EventBus:subscribe(config.ON_SPAWN_START, id)
+  EventBus:subscribe(config.ON_SPAWN_END, id)
+end
 
-  EventBus:subscribe(config.SPAWN_UNIT, go.get_id()) 
+function spawn_pack(self, handle, time_elapced)
+  local delay = config.SPAWN_INTERVAL / config.UNITS_BY_PACK
+  self.spawn_unit_timer = timer.delay(delay, false, spawn_unit)
+  EventBus:emit(config.ON_SPAWN_PACK)
+end
+
+function spawn_unit(self, handle, time_elapced)
+  EventBus:emit(config.ON_SPAWN_UNIT)
 end
 
 function on_message(self, message_id, message, sender)
-  if message_id == config.SPAWN_UNIT then
-    self.instance:spawn(message.unit)
+  if message_id == config.ON_SPAWN_START then
+    self.spawn_pack_timer = timer.delay(config.SPAWN_INTERVAL, true, spawn_pack)
+  end
+
+  if message_id == config.ON_SPAWN_END then
+    timer.cancel(self.spawn_pack_timer)
   end
 end
