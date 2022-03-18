@@ -47,6 +47,6 @@ config.SPAWN_PACK = Pack("spawnpack", {
 })
 
 config.SPAWN_INTERVAL = 3
-config.UNITS_BY_PACK = 1
+config.UNITS_BY_PACK = 2
 
 return config

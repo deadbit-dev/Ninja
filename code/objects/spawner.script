@@ -23,10 +23,22 @@ end
 
 function spawn_pack(self)
   local pack = config.SPAWN_PACK
-  local prefab = msg.url(nil, pack:get_id(), pack:get_random():get_id())
-  local unit = self.instance:spawn(prefab)
+  self.prefab = msg.url(nil, pack:get_id(), pack:get_random():get_id())
+  self.delay = state.spawn_interval / state.units_by_pack
+  self.count = 0
+  
+  spawn_unit(self)
+end
 
+function spawn_unit(self)
+  if self.count == state.units_by_pack then 
+    return
+  end
+
+  local unit = self.instance:spawn(self.prefab)
   table.insert(state.units, unit)
-
   EventBus:emit(config.ON_SPAWN_UNIT, {unit = unit})
+
+  self.count = self.count + 1  
+  timer.delay(self.delay, false, spawn_unit)
 end
