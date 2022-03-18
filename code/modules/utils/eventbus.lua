@@ -13,7 +13,11 @@ end
 
 function EventBus.static:unsubscribe(event, subscriber)
   local subscribers = EventBus.event_storage[event]
-  
+
+  if not subscribers then
+    return
+  end
+
   for index, value in ipairs(subscribers) do
     if value == subscriber then
       table.remove(subscribers, index)
@@ -22,7 +26,13 @@ function EventBus.static:unsubscribe(event, subscriber)
 end
 
 function EventBus.static:emit(event, data)
+  print(event)
+
   local subscribers = EventBus.event_storage[event]
+
+  if not subscribers then
+    return
+  end
 
   for _, subscriber in ipairs(subscribers) do
     msg.post(subscriber, event, data)
