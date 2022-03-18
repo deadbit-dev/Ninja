@@ -1,8 +1,7 @@
-local state = {}
+local State = {}
 
-state.spawn_interval = 0
-state.units_by_pack = 0 
+State.context = {
+  units = {}
+}
 
-state.units = {}
-
-return state
+return State
