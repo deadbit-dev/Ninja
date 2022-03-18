@@ -1,6 +1,21 @@
 local config = require "code.config"
+local state = require "code.state"
 local EventBus = require "code.modules.utils.eventbus"
 
 function init(self)
-  EventBus:emit(config.ON_SPAWN_START)
+  self.id = go.get_id()
+  EventBus:subscribe(config.ON_START_SCENE, self.id)
+end
+
+function on_message(self, message_id, message)
+  if message_id == config.ON_START_SCENE then
+    init_game()  
+  end
+end
+
+function init_game()
+  state.spawn_interval = config.SPAWN_INTERVAL
+  state.units_by_pack = config.UNITS_BY_PACK
+
+  EventBus:emit(config.ON_START_SPAWN)
 end
