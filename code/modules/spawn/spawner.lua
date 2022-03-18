@@ -1,22 +1,18 @@
 local class = require "code.modules.utils.middleclass"
 local Spawner = class('Spawner')
 
-local _private = setmetatable({}, {__mode = "k"})
-
 function Spawner:initialize(gamefield, zones)
-  _private[self] = {
-    gamefield = gamefield,
-    zones = zones
-  }
+  self.gamefield = gamefield
+  self.zones = zones
 end
 
 function Spawner:spawn(prefab)
-  local point = _private[self].zones:get_random():get_random_point()
-  local pos = _private[self].gamefield:screen_to_field(point:get_pos())
-  local axis = vmath.vector3(0, 0, 1)
-  local quat = vmath.quat_axis_angle(axis, point:get_angle())
+  local point = self.zones:get_random_value():get_random_point()
+  local pos = self.gamefield:screen_to_field(point.pos)
+  local unit = factory.create(prefab, pos)
+  go.set(unit, "euler.z", point.angle)
 
-  return factory.create(prefab, pos, quat)
+  return unit 
 end
 
 return Spawner
