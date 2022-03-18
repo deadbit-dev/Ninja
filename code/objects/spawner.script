@@ -1,31 +1,32 @@
-local class = require "code.modules.utils.middleclass"
 local config = require "code.config"
+local state = require "code.state"
 local EventBus = require "code.modules.utils.eventbus"
-local SpawnZone = require "code.modules.spawn.spawnzone"
-local SpawnPack = require "code.modules.spawn.spawnpack"
+local Spawner = require "code.modules.spawn.spawner"
 
 function init(self)
-  local id = go.get_id()
-  EventBus:subscribe(config.ON_SPAWN_START, id)
-  EventBus:subscribe(config.ON_SPAWN_END, id)
+  self.id = go.get_id()
+  self.instance = Spawner(config.GAME_FIELD, config.SPAWN_ZONES)
+
+  EventBus:subscribe(config.ON_START_SPAWN, self.id)
+  EventBus:subscribe(config.ON_STOP_SPAWN, self.id)
 end
 
-function spawn_pack(self, handle, time_elapced)
-  local delay = config.SPAWN_INTERVAL / config.UNITS_BY_PACK
-  self.spawn_unit_timer = timer.delay(delay, false, spawn_unit)
-  EventBus:emit(config.ON_SPAWN_PACK)
-end
-
-function spawn_unit(self, handle, time_elapced)
-  EventBus:emit(config.ON_SPAWN_UNIT)
-end
-
-function on_message(self, message_id, message, sender)
-  if message_id == config.ON_SPAWN_START then
-    self.spawn_pack_timer = timer.delay(config.SPAWN_INTERVAL, true, spawn_pack)
+function on_message(self, message_id)
+  if message_id == config.ON_START_SPAWN then
+    self.timer = timer.delay(state.spawn_interval, true, spawn_pack)
   end
 
-  if message_id == config.ON_SPAWN_END then
-    timer.cancel(self.spawn_pack_timer)
+  if message_id == config.ON_STOP_SPAWN then
+    timer.cancel(self.timer)
   end
+end
+
+function spawn_pack(self)
+  local pack = config.SPAWN_PACK
+  local prefab = msg.url(nil, pack:get_id(), pack:get_random():get_id())
+  local unit = self.instance:spawn(prefab)
+
+  table.insert(state.units, unit)
+
+  EventBus:emit(config.ON_SPAWN_UNIT, {unit = unit})
 end
