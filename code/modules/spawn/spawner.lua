@@ -12,11 +12,11 @@ end
 
 function Spawner:spawn(prefab)
   local point = _private[self].zones:get_random():get_random_point()
-  local pos = point:get_pos()
+  local pos = _private[self].gamefield:screen_to_field(point:get_pos())
+  local axis = vmath.vector3(0, 0, 1)
+  local quat = vmath.quat_axis_angle(axis, point:get_angle())
 
-  pos = _private[self].gamefield:screen_to_field(pos)
-
-  return factory.create(prefab, pos)
+  return factory.create(prefab, pos, quat)
 end
 
 return Spawner
