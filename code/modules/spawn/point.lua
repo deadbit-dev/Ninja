@@ -6,7 +6,7 @@ local _private = setmetatable({}, {__mode = "k"})
 function Point:initialize(position, angle)
   _private[self] = {
     pos = position,
-    angle = angle
+    angle = math.rad(angle)
   }
 end
 
