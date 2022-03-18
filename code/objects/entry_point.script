@@ -1,0 +1,16 @@
+local config = require "code.config"
+local EventBus = require "code.modules.utils.eventbus"
+
+go.property("scene", msg.url())
+
+function init(self)
+  self.id = go.get_id()
+  EventBus:subscribe(config.ON_INIT_SCENE, self.id)
+  EventBus:emit(config.ON_INIT_SCENE, {scene = self.scene})
+end
+
+function on_message(self, message_id)
+  if message_id == config.ON_INIT_SCENE then
+    EventBus:emit(config.ON_START_SCENE, {scene = self.scene})
+  end
+end
