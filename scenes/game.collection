@@ -56,8 +56,8 @@ instances {
   }
 }
 instances {
-  id: "spawnpack"
-  prototype: "/prefabs/spawnpack.go"
+  id: "units"
+  prototype: "/prefabs/units.go"
   position {
     x: 0.0
     y: 0.0
@@ -149,7 +149,7 @@ embedded_instances {
 }
 embedded_instances {
   id: "spawner"
-  children: "spawnpack"
+  children: "units"
   data: "components {\n"
   "  id: \"spawner\"\n"
   "  component: \"/code/objects/spawner.script\"\n"
