@@ -1,45 +1,71 @@
 local config = require "code.config"
-local state = require "code.state"
+local State = require "code.state"
 local EventBus = require "code.modules.utils.eventbus"
-local Spawner = require "code.modules.spawn.spawner"
+
+go.property("units", 0)
+go.property("interval", 0)
 
 function init(self)
   self.id = go.get_id()
-  self.instance = Spawner(config.GAME_FIELD, config.SPAWN_ZONES)
+  self.spawning = false
 
   EventBus:subscribe(config.ON_START_SPAWN, self.id)
   EventBus:subscribe(config.ON_STOP_SPAWN, self.id)
 end
 
 function on_message(self, message_id)
-  if message_id == config.ON_START_SPAWN then
-    self.timer = timer.delay(state.spawn_interval, true, spawn_pack)
+  if message_id == config.ON_START_SPAWN and not self.spawning then
+    start_spawn(self)
   end
 
   if message_id == config.ON_STOP_SPAWN then
-    timer.cancel(self.timer)
+    stop_spawn(self)
   end
 end
 
-function spawn_pack(self)
-  self.pack = config.SPAWN_PACK
-  self.delay = state.spawn_interval / state.units_by_pack
-  self.count = 0
-  
-  spawn_unit(self)
-end
-
-function spawn_unit(self)
-  if self.count == state.units_by_pack then 
+function update(self, dt)
+  if not self.spawning then
     return
   end
 
-  local prefab = msg.url(nil, self.pack:get_id(), self.pack:get_random():get_id())
-  local unit = self.instance:spawn(prefab)
+  local delay = self.interval / self.units
+  if delay < self.duration then
+    print(delay)
+    spawn()
+    self.duration = 0
+  end
 
-  table.insert(state.units, unit)
+  self.duration = self.duration + dt
+end
+
+function start_spawn(self)
+  self.spawning = true
+  self.units = config.UNITS_SPAWN_MIN
+  self.interval = config.SPAWN_INTERVAL_MIN
+  self.duration = 0
+
+  go.animate("#", "units", 
+    config.UNITS_SPAWN_PLAYBACK, 
+    config.UNITS_SPAWN_MAX, 
+    config.UNITS_SPAWN_EASING, 
+    config.UNITS_SPAWN_DURATION
+  )
+  go.animate("#", "interval", 
+    config.SPAWN_INTERVAL_PLAYBACK, 
+    config.SPAWN_INTERVAL_MAX, 
+    config.SPAWN_INTERVAL_EASING, 
+    config.SPAWN_INTERVAL_DURATION
+  )
+end
+
+function stop_spawn(self)
+  self.spawning = false
+end
+
+function spawn()
+  local data = config.GENERATOR:get_next_data()
+  local unit = config.SPAWNER:spawn(data.unit)
+
+  State.context.units[unit] = data.modification
   EventBus:emit(config.ON_SPAWN_UNIT, {unit = unit})
-
-  self.count = self.count + 1  
-  timer.delay(self.delay, false, spawn_unit)
 end
