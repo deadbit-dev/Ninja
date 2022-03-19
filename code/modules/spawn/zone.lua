@@ -2,10 +2,9 @@ local class = require "code.modules.utils.middleclass"
 local Point = require "code.modules.cammon.point"
 local Zone = class('Zone')
 
-function Zone:initialize(pointA, pointB, percent)
+function Zone:initialize(pointA, pointB)
   self.pointA = pointA
   self.pointB = pointB
-  self.percent = percent
 end
 
 function Zone:get_random_point()
