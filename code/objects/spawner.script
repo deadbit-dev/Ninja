@@ -30,7 +30,6 @@ function update(self, dt)
 
   local delay = self.interval / self.units
   if delay < self.duration then
-    print(delay)
     spawn()
     self.duration = 0
   end
@@ -58,14 +57,19 @@ function start_spawn(self)
   )
 end
 
-function stop_spawn(self)
-  self.spawning = false
-end
-
 function spawn()
   local data = config.GENERATOR:get_next_data()
-  local unit = config.SPAWNER:spawn(data.unit)
+  local unit = config.SPAWNER:spawn(data.url)
+  State.context.units[unit] = data.meta
 
-  State.context.units[unit] = data.modification
   EventBus:emit(config.ON_SPAWN_UNIT, {unit = unit})
+  EventBus:emit(config.ON_ADD_FORCE, {
+    unit = unit,
+    angle = math.rad(go.get(unit, "euler.z")),
+    force = data.meta.force
+  })
+end
+
+function stop_spawn(self)
+  self.spawning = false
 end

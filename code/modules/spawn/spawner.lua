@@ -7,8 +7,9 @@ function Spawner:initialize(gamefield, zones)
 end
 
 function Spawner:spawn(prefab)
-  local point = self.zones:get_random_value():get_random_point()
+  local point = self.zones:get_random_value().value:get_random_point()
   local pos = self.gamefield:screen_to_field(point.pos)
+
   local unit = factory.create(prefab, pos)
   go.set(unit, "euler.z", point.angle)
 

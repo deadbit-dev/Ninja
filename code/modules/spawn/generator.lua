@@ -1,4 +1,5 @@
 local class = require "code.modules.utils.middleclass"
+local lang = require "code.modules.utils.lang"
 local Generator = class('Generator')
 
 function Generator:initialize(pack)
@@ -7,9 +8,10 @@ end
 
 function Generator:get_next_data() 
   local unit = self.pack:get_random_value()
+  
   local data = {
-    unit = msg.url(nil, self.pack.id, unit.id),
-    modification = unit.modification
+    url = msg.url(nil, self.pack.id, unit.id),
+    meta = lang:table_copy(unit.value)
   }
 
   return data

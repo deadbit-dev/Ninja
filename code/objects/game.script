@@ -4,18 +4,22 @@ local EventBus = require "code.modules.utils.eventbus"
 
 function init(self)
   self.id = go.get_id()
+  self.active = false
+
   EventBus:subscribe(config.ON_START_SCENE, self.id)
 end
 
 function on_message(self, message_id, message)
-  if message_id == config.ON_START_SCENE then
-    init_game()  
+  if message_id == config.ON_START_SCENE and not self.active then
+    self.active = true
+    game() 
   end
 end
 
-function init_game()
+function game()
   State.context.spawn_interval = config.SPAWN_INTERVAL
   State.context.units_by_pack = config.UNITS_BY_PACK
 
+  EventBus:emit(config.ON_SIMULATE_PHYSICS)
   EventBus:emit(config.ON_START_SPAWN)
 end
