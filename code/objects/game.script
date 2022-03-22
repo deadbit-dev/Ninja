@@ -17,9 +17,6 @@ function on_message(self, message_id, message)
 end
 
 function game()
-  State.context.spawn_interval = config.SPAWN_INTERVAL
-  State.context.units_by_pack = config.UNITS_BY_PACK
-
-  EventBus:emit(config.ON_SIMULATE_PHYSICS)
-  EventBus:emit(config.ON_START_SPAWN)
+  -- EventBus:emit(config.ON_INIT_SPAWN)
+  EventBus:emit(config.ON_INIT_MOVE)
 end
