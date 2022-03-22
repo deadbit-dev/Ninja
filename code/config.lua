@@ -1,6 +1,6 @@
 local Generator = require "code.modules.spawn.generator"
 local Spawner = require "code.modules.spawn.spawner"
-local Zone = require "code.modules.spawn.zone"
+local Zone = require "code.modules.cammon.zone"
 local Point = require "code.modules.cammon.point"
 local Pack = require "code.modules.cammon.pack"
 local Element = require "code.modules.cammon.element"
@@ -12,19 +12,19 @@ config.ON_LOAD_SCENE = hash("load_scene")
 config.ON_INIT_SCENE = hash("init_scene")
 config.ON_START_SCENE = hash("start_scene")
 
-config.ON_START_SPAWN = hash("start_spawn")
+config.ON_INIT_SPAWN = hash("init_spawn")
 config.ON_STOP_SPAWN = hash("stop_spawn")
-config.ON_SPAWN_UNIT = hash("spawn_unit")
 
-config.ON_SIMULATE_PHYSICS = hash("simulate_physics")
-config.ON_STOP_PHYSICS = hash("stop_physics")
+config.ON_INIT_MOVE = hash("init_move")
+config.ON_STOP_MOVE = hash("stop_move")
 
-config.ON_ADD_FORCE = hash("add_force")
+config.ON_INIT_ROTATE = hash("init_rotate")
+config.ON_STOP_ROTATE = hash("stop_rotate")
 
 -- Spawn
 config.SPAWN_ZONES = Pack("spawn_zones", {
   Element("bottom", Zone(
-    Point(vmath.vector3(1.0, 0.0, 0), 55), 
+    Point(vmath.vector3(0.0, 0.0, 0), 55), 
     Point(vmath.vector3(1.0, 0.25, 0), 125)
   ), 70),
   Element("left", Zone(
@@ -37,19 +37,18 @@ config.SPAWN_ZONES = Pack("spawn_zones", {
   ), 15)
 })
 
-config.MODIFICATIONS = {
-  velocity = vmath.vector3(),
+config.DEFAULT_UNIT = {
   force = 350,
   mass = 25
 }
 
 config.UNITS = Pack("units", {
-  Element("apple", config.MODIFICATIONS, 50),
-  Element("cherry", config.MODIFICATIONS, 50),
-  Element("limon", config.MODIFICATIONS, 50),
-  Element("pear", config.MODIFICATIONS, 50),
-  Element("strawberry", config.MODIFICATIONS, 50),
-  Element("watermelon", config.MODIFICATIONS, 50)
+  Element("apple", config.DEFAULT_UNIT, 50),
+  Element("cherry", config.DEFAULT_UNIT, 50),
+  Element("limon", config.DEFAULT_UNIT, 50),
+  Element("pear", config.DEFAULT_UNIT, 50),
+  Element("strawberry", config.DEFAULT_UNIT, 50),
+  Element("watermelon", config.DEFAULT_UNIT, 50)
 })
 
 -- DIFFICULT CURVES
@@ -65,7 +64,7 @@ config.UNITS_SPAWN_MAX = 5
 config.UNITS_SPAWN_EASING = go.EASING_INOUTEXPO
 config.UNITS_SPAWN_DURATION = 30
 
--- Physics
+-- Move
 config.GRAVITY = 9.8
 config.AXIS_GRAVITY = vmath.vector3(0, -1, 0)
 
