@@ -11,7 +11,7 @@ function Generator:get_next_data()
   
   local data = {
     url = msg.url(nil, self.pack.id, unit.id),
-    meta = lang:table_copy(unit.value)
+    meta = unit.value
   }
 
   return data
