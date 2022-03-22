@@ -24,7 +24,7 @@ config.ON_ADD_FORCE = hash("add_force")
 -- Spawn
 config.SPAWN_ZONES = Pack("spawn_zones", {
   Element("bottom", Zone(
-    Point(vmath.vector3(1.0, 0.0, 0), 55), 
+    Point(vmath.vector3(0.0, 0.0, 0), 55), 
     Point(vmath.vector3(1.0, 0.25, 0), 125)
   ), 70),
   Element("left", Zone(
