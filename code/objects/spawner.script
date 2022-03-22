@@ -7,15 +7,15 @@ go.property("interval", 0)
 
 function init(self)
   self.id = go.get_id()
-  self.spawning = false
+  self.simulate = false
 
-  EventBus:subscribe(config.ON_START_SPAWN, self.id)
+  EventBus:subscribe(config.ON_INIT_SPAWN, self.id)
   EventBus:subscribe(config.ON_STOP_SPAWN, self.id)
 end
 
 function on_message(self, message_id)
-  if message_id == config.ON_START_SPAWN and not self.spawning then
-    start_spawn(self)
+  if message_id == config.ON_INIT_SPAWN and not self.simulate then
+    init_spawn(self)
   end
 
   if message_id == config.ON_STOP_SPAWN then
@@ -24,21 +24,21 @@ function on_message(self, message_id)
 end
 
 function update(self, dt)
-  if not self.spawning then
+  if not self.simulate then
     return
   end
 
   local delay = self.interval / self.units
   if delay < self.duration then
-    spawn()
+    simulate()
     self.duration = 0
   end
 
   self.duration = self.duration + dt
 end
 
-function start_spawn(self)
-  self.spawning = true
+function init_spawn(self)
+  self.simulate = true
   self.units = config.UNITS_SPAWN_MIN
   self.interval = config.SPAWN_INTERVAL_MIN
   self.duration = 0
@@ -49,6 +49,7 @@ function start_spawn(self)
     config.UNITS_SPAWN_EASING, 
     config.UNITS_SPAWN_DURATION
   )
+
   go.animate("#", "interval", 
     config.SPAWN_INTERVAL_PLAYBACK, 
     config.SPAWN_INTERVAL_MAX, 
@@ -57,19 +58,13 @@ function start_spawn(self)
   )
 end
 
-function spawn()
+function simulate()
   local data = config.GENERATOR:get_next_data()
-  local unit = config.SPAWNER:spawn(data.url)
-  State.context.units[unit] = data.meta
+  local unit = config.SPAWNER:spawn(data)
 
-  EventBus:emit(config.ON_SPAWN_UNIT, {unit = unit})
-  EventBus:emit(config.ON_ADD_FORCE, {
-    unit = unit,
-    angle = math.rad(go.get(unit, "euler.z")),
-    force = data.meta.force
-  })
+  table.insert(State.context.units, unit)
 end
 
 function stop_spawn(self)
-  self.spawning = false
+  self.simulate = false
 end
