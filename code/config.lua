@@ -20,13 +20,13 @@ config.SPAWN_ZONES = {
   )
 }
 
-config.SPAWN_UNITS = {
-  { id = "apple#entire"},
-  { id = "cherry#entire"},
-  { id = "limon#entire"},
-  { id = "pear#entire"},
-  { id = "strawberry#entire"},
-  { id = "watermelon#entire"}
+config.UNITS = {
+  { id = "apple"},
+  { id = "cherry"},
+  { id = "limon"},
+  { id = "pear"},
+  { id = "strawberry"},
+  { id = "watermelon"}
 }
 
 config.SPAWN_PACK = {
@@ -44,7 +44,7 @@ config.GAMEFIELD = {
 
 config.SLICER = Slicer({
   id = hash("slicer"),
-  min_speed_for_slice = 0,
+  min_speed_for_slice = 10,
   radius = 5
 })
 
