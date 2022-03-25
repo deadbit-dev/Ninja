@@ -1,0 +1,8 @@
+function window_callback(self, event, data)
+  if event == window.WINDOW_EVENT_RESIZED then
+  end
+end
+
+function init(self)
+  window.set_listener(window_callback)
+end
