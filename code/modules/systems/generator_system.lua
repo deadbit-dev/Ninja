@@ -42,9 +42,12 @@ function GeneratorSystem:update(dt)
     self.counter_unit = self.counter_unit + 1
     self.delay = self.duration_pack / self.unit_by_pack
   end
-  
+ 
+  local unit = Unit(Math:get_random_value(self.units))
+  unit.id = unit.id .. "#entire"
+
   EventBus:emit(Events.ON_GENERATED, {
-    unit = Unit(Math:get_random_value(self.units))
+    unit = unit
   })
 end
 

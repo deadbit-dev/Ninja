@@ -15,7 +15,7 @@ function init(self)
     GravitySystem(state.context.units),
     TorqueSystem(state.context.units),
     GameFieldSystem(config.GAMEFIELD, state.context.units),
-    GeneratorSystem(config.SPAWN_UNITS, config.SPAWN_PACK),    
+    GeneratorSystem(config.UNITS, config.SPAWN_PACK),    
     SpawnSystem(config.SPAWN_ZONES, config.GAMEFIELD, state.context.units),
     SliceSystem(config.SLICER, state.context.units, config.GAMEFIELD)
   }
