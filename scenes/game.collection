@@ -28,40 +28,12 @@ instances {
   }
 }
 instances {
-  id: "entry_point"
-  prototype: "/prefabs/entry_point.go"
+  id: "background"
+  prototype: "/prefabs/background.go"
   position {
     x: 0.0
     y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  component_properties {
-    id: "entry_point"
-    properties {
-      id: "scene"
-      value: "/game"
-      type: PROPERTY_TYPE_URL
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "units"
-  prototype: "/prefabs/units.go"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
+    z: -1.0
   }
   rotation {
     x: 0.0
@@ -112,11 +84,45 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "systems"
-  children: "game"
-  children: "move"
-  children: "rotate"
-  children: "spawner"
+  id: "entry_point"
+  data: "components {\n"
+  "  id: \"entry_point\"\n"
+  "  component: \"/code/scripts/entry_point.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "entity"
+  children: "slicer"
+  children: "splatters"
+  children: "units"
   data: ""
   position {
     x: 0.0
@@ -136,11 +142,77 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "spawner"
-  children: "units"
-  data: "components {\n"
-  "  id: \"spawner\"\n"
-  "  component: \"/code/objects/spawner.script\"\n"
+  id: "slicer"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "units"
+  children: "apple"
+  children: "cherry"
+  children: "limon"
+  children: "pear"
+  children: "strawberry"
+  children: "watermelon"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "splatters"
+  data: "embedded_components {\n"
+  "  id: \"splatter0\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/splatters/splatter0.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"splatter1\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/splatters/splatter1.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -172,10 +244,13 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "move"
-  data: "components {\n"
-  "  id: \"move\"\n"
-  "  component: \"/code/objects/move.script\"\n"
+  id: "apple"
+  data: "embedded_components {\n"
+  "  id: \"entire\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/units/apple/apple.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -207,10 +282,13 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "rotate"
-  data: "components {\n"
-  "  id: \"rotate\"\n"
-  "  component: \"/code/objects/rotate.script\"\n"
+  id: "cherry"
+  data: "embedded_components {\n"
+  "  id: \"entire\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/units/cherry/cherry.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -242,10 +320,127 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "game"
-  data: "components {\n"
-  "  id: \"game\"\n"
-  "  component: \"/code/objects/game.script\"\n"
+  id: "limon"
+  data: "embedded_components {\n"
+  "  id: \"entire\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/units/limon/limon.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "pear"
+  data: "embedded_components {\n"
+  "  id: \"entire\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/units/pear/pear.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "strawberry"
+  data: "embedded_components {\n"
+  "  id: \"entire\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/units/strawberry/strawberry.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "watermelon"
+  data: "embedded_components {\n"
+  "  id: \"entire\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/units/watermelon/watermelon.go\\\"\\n"
+  "load_dynamically: false\\n"
+  "\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
