@@ -1,78 +1,51 @@
-local Generator = require "code.modules.spawn.generator"
-local Spawner = require "code.modules.spawn.spawner"
-local Zone = require "code.modules.spawn.zone"
-local Point = require "code.modules.cammon.point"
-local Pack = require "code.modules.cammon.pack"
-local Element = require "code.modules.cammon.element"
-local Field = require "code.modules.cammon.field"
+local Spawn = require "code.modules.utils.spawn"
+local Slicer = require "code.modules.entities.slicer"
 local config = {}
 
--- Event
-config.ON_LOAD_SCENE = hash("load_scene")
-config.ON_INIT_SCENE = hash("init_scene")
-config.ON_START_SCENE = hash("start_scene")
-
-config.ON_START_SPAWN = hash("start_spawn")
-config.ON_STOP_SPAWN = hash("stop_spawn")
-config.ON_SPAWN_UNIT = hash("spawn_unit")
-
-config.ON_SIMULATE_PHYSICS = hash("simulate_physics")
-config.ON_STOP_PHYSICS = hash("stop_physics")
-
-config.ON_ADD_FORCE = hash("add_force")
-
--- Spawn
-config.SPAWN_ZONES = Pack("spawn_zones", {
-  Element("bottom", Zone(
-    Point(vmath.vector3(0.0, 0.0, 0), 55), 
-    Point(vmath.vector3(1.0, 0.25, 0), 125)
-  ), 70),
-  Element("left", Zone(
-    Point(vmath.vector3(0.0, 0.0, 0), 55), 
-    Point(vmath.vector3(0.0, 0.25, 0), 35)
-  ), 15),
-  Element("right", Zone(
-    Point(vmath.vector3(1.0, 0.0, 0), 125), 
-    Point(vmath.vector3(1.0, 0.25, 0), 145)
-  ), 15)
-})
-
-config.MODIFICATIONS = {
-  velocity = vmath.vector3(),
-  force = 350,
-  mass = 25
+config.SPAWN_ZONES = {
+  Spawn.Zone(
+    Spawn.Point(vmath.vector3(0.0, 0.0, 0), 65, 300, 350), 
+    Spawn.Point(vmath.vector3(1.0, 0.0, 0), 115, 300, 350),
+    60
+  ),
+  Spawn.Zone(
+    Spawn.Point(vmath.vector3(0.0, 0.0, 0), 65, 300, 350), 
+    Spawn.Point(vmath.vector3(0.0, 0.25, 0), 35, 250, 300),
+    20
+  ),
+  Spawn.Zone(
+    Spawn.Point(vmath.vector3(1.0, 0.0, 0), 115, 300, 350), 
+    Spawn.Point(vmath.vector3(1.0, 0.25, 0), 145, 250, 300),
+    20
+  )
 }
 
-config.UNITS = Pack("units", {
-  Element("apple", config.MODIFICATIONS, 50),
-  Element("cherry", config.MODIFICATIONS, 50),
-  Element("limon", config.MODIFICATIONS, 50),
-  Element("pear", config.MODIFICATIONS, 50),
-  Element("strawberry", config.MODIFICATIONS, 50),
-  Element("watermelon", config.MODIFICATIONS, 50)
+config.SPAWN_UNITS = {
+  { id = "apple#entire"},
+  { id = "cherry#entire"},
+  { id = "limon#entire"},
+  { id = "pear#entire"},
+  { id = "strawberry#entire"},
+  { id = "watermelon#entire"}
+}
+
+config.SPAWN_PACK = {
+  ["1"] = { delay = 3, duration = 1, units = 1 },
+  ["3"] = { units = 2 },
+  ["5"] = { units = 3 },
+  ["10"] = { duration = 2, units = 5 },
+  ["20"] = { delay = 1 }
+}
+
+config.GAMEFIELD = {
+  camera = require "orthographic.camera",
+  camera_id = hash("/camera")
+}
+
+config.SLICER = Slicer({
+  id = hash("slicer"),
+  min_speed_for_slice = 0,
+  radius = 5
 })
-
--- DIFFICULT CURVES
-config.SPAWN_INTERVAL_MIN = 3.5
-config.SPAWN_INTERVAL_PLAYBACK = go.PLAYBACK_ONCE_FORWARD
-config.SPAWN_INTERVAL_MAX = 2.5
-config.SPAWN_INTERVAL_EASING = go.EASING_INOUTEXPO
-config.SPAWN_INTERVAL_DURATION = 70
-
-config.UNITS_SPAWN_MIN = 1
-config.UNITS_SPAWN_PLAYBACK = go.PLAYBACK_ONCE_FORWARD
-config.UNITS_SPAWN_MAX = 5
-config.UNITS_SPAWN_EASING = go.EASING_INOUTEXPO
-config.UNITS_SPAWN_DURATION = 30
-
--- Physics
-config.GRAVITY = 9.8
-config.AXIS_GRAVITY = vmath.vector3(0, -1, 0)
-
--- Object
-config.CAMERA = hash("/camera")
-config.GAME_FIELD = Field(config.CAMERA)
-config.GENERATOR = Generator(config.UNITS)
-config.SPAWNER = Spawner(config.GAME_FIELD, config.SPAWN_ZONES)
 
 return config

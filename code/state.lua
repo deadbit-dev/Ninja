@@ -1,7 +1,7 @@
-local State = {}
+local state = {}
 
-State.context = {
+state.context = {
   units = {}
 }
 
-return State
+return state
