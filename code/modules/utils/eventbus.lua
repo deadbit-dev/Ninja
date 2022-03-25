@@ -2,17 +2,22 @@ local class = require "code.modules.utils.middleclass"
 local EventBus = class('EventBus')
 
 EventBus.static.event_storage = {}
+EventBus.static.handler_storage = {}
 
-function EventBus.static:subscribe(event, subscriber)
-  if not EventBus.event_storage[event] then 
-    EventBus.event_storage[event] = {}
+function EventBus.static:subscribe(event_id, subscriber, context)
+  if not EventBus.event_storage[event_id] then 
+    EventBus.event_storage[event_id] = {}
   end
-
-  table.insert(EventBus.event_storage[event], subscriber)
+  
+  table.insert(EventBus.event_storage[event_id], subscriber)
+ 
+  if type(subscriber) == "function" then
+    EventBus.handler_storage[subscriber] = context
+  end
 end
 
-function EventBus.static:unsubscribe(event, subscriber)
-  local subscribers = EventBus.event_storage[event]
+function EventBus.static:unsubscribe(event_id, subscriber)
+  local subscribers = EventBus.event_storage[event_id]
 
   if not subscribers then
     return
@@ -25,17 +30,21 @@ function EventBus.static:unsubscribe(event, subscriber)
   end
 end
 
-function EventBus.static:emit(event, data)
-  print(event)
-
-  local subscribers = EventBus.event_storage[event]
+function EventBus.static:emit(event_id, data)
+  local subscribers = EventBus.event_storage[event_id]
 
   if not subscribers then
     return
   end
 
   for _, subscriber in ipairs(subscribers) do
-    msg.post(subscriber, event, data)
+    local type = type(subscriber)
+
+    if type == "function" then
+      subscriber(EventBus.handler_storage[subscriber], data)
+    elseif type == "userdata" then
+      msg.post(subscriber, event_id, data)
+    end
   end
 end
 
