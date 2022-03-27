@@ -3,12 +3,14 @@ local Events = require "code.events"
 local EventBus = require "code.modules.utils.eventbus"
 local InputSystem = class("InputSystem")
 
+local TOUCH = hash("touch")
+
 function InputSystem:initialize()
   self.pressed = false
 end
 
 function InputSystem:on_input(action_id, action)
-  if action_id == hash("touch") then
+  if action_id == TOUCH then
     local action_pos = vmath.vector3(action.x, action.y, 0)
 
     if action.pressed then

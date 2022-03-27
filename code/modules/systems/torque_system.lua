@@ -1,8 +1,8 @@
 local class = require "code.modules.utils.middleclass"
 local TorqueSystem = class("TorqueSystem")
 
-function TorqueSystem:initialize(units)
-  self.units = units
+function TorqueSystem:initialize(state)
+  self.units = state.context.units
 end
 
 function TorqueSystem:update(dt)
