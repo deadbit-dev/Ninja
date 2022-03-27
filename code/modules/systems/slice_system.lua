@@ -3,11 +3,11 @@ local Events = require "code.events"
 local EventBus = require "code.modules.utils.eventbus"
 local SliceSystem = class("SliceSystem")
 
-function SliceSystem:initialize(slicer, units, gamefield)
-  self.gamefield = gamefield
-  self.slicer = slicer
-  self.units = units
-  self.previous_position = slicer.position
+function SliceSystem:initialize(state, config)
+  self.gamefield = config.GAMEFIELD
+  self.slicer = config.SLICER
+  self.units = state.context.units
+  self.previous_position = self.slicer.position
 
   EventBus:subscribe(Events.ON_TOUCH_START, self.touch_start, self)
   EventBus:subscribe(Events.ON_TOUCH_PROCESS, self.touch_process, self)
@@ -32,14 +32,14 @@ function SliceSystem:inside_unit(unit)
 end
 
 function SliceSystem:touch_start(data)
-  self.slicer.position = self.gamefield.camera.screen_to_world(self.gamefield.camera_id, data.pos)
+  self.slicer:set_position(self.gamefield.camera.screen_to_world(self.gamefield.camera_id, data.pos))
   self.previous_position = self.slicer.position
   self.slicer.active = true
   self.slicer.slicing = false
 end
 
 function SliceSystem:touch_process(data)
-  self.slicer.position = self.gamefield.camera.screen_to_world(self.gamefield.camera_id, data.pos)
+  self.slicer:set_position(self.gamefield.camera.screen_to_world(self.gamefield.camera_id, data.pos))
   self:is_slice(self.slicer.position)
   self.previous_position = self.slicer.position
 end
