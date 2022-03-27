@@ -1,0 +1,40 @@
+local config = require "code.config"
+local state = require "code.state"
+
+local InputSystem = require "code.modules.systems.input_system"
+local GravitySystem = require "code.modules.systems.gravity_system"
+local TorqueSystem = require "code.modules.systems.torque_system"
+local GameFieldSystem = require "code.modules.systems.gamefield_system"
+local GeneratorSystem = require "code.modules.systems.generator_system"
+local SpawnSystem = require "code.modules.systems.spawn_system"
+local SliceSystem = require "code.modules.systems.slice_system"
+
+function init(self)
+  self.systems = {
+    InputSystem(),
+    GravitySystem(state, config),
+    TorqueSystem(state),
+    GameFieldSystem(state, config),
+    GeneratorSystem(config),    
+    SpawnSystem(state, config),
+    SliceSystem(state, config)
+  }
+
+  msg.post(".", "acquire_input_focus")
+end
+
+function update(self, dt)
+  for i=1, #self.systems do
+    if self.systems[i].update then
+      self.systems[i]:update(dt)
+    end
+  end
+end
+
+function on_input(self, action_id, action)
+  for i=1, #self.systems do
+    if self.systems[i].on_input then
+      self.systems[i]:on_input(action_id, action)
+    end
+  end
+end
