@@ -27,7 +27,7 @@ end
 function Math:get_random_value(elements)
   local weights = {}
   for i = 1, #elements do
-    table.insert(weights, i, elements[i].weight or 50)
+    table.insert(weights, i, elements[i].weight or 1)
   end
   
   return elements[Math.random_range_weight(weights)]
