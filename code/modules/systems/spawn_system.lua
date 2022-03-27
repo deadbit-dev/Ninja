@@ -7,30 +7,28 @@ local Unit = require "code.modules.entities.unit"
 local SpawnSystem = class("SpawnSystem")
 
 function SpawnSystem:initialize(state, config)
+  self.spawner = config.SPAWNER
   self.zones = config.SPAWN_ZONES
-  self.gamefield = config.GAMEFIELD
+  self.camera = config.CAMERA
   self.units = state.context.units
   EventBus:subscribe(Events.ON_GENERATED, self.spawn, self)
 end
 
 function SpawnSystem:spawn(data)
   local point = Math:get_random_value(self.zones):get_random_point()
-  local pos = Camera:screen_to_field(point.pos, self.gamefield.camera_id, self.gamefield.camera)
-
-  -- pprint("POINT: ", point)
-  -- pprint("WORLD: ", pos)
-
+  local position = Camera:viewport_to_world(point.pos, self.camera.id, self.camera.bihavour)
   local angle = point.angle
   local force = math.random(point.min_force, point.max_force)
-  local torque_force = math.random(point.torque_force_min, point.torque_force_max)
 
-  local unit = Unit({ view = factory.create("unit#factory") })
-  msg.post(msg.url(nil, unit.view, "sprite"), "play_animation", { id = data.unit.view })
+  local unit = Unit({ 
+    view = factory.create(self.spawner),
+    position = position,
+    velocity = vmath.vector3(math.cos(math.rad(angle)), math.sin(math.rad(angle)), 0) * force,
+    torque = math.random(point.torque_force_min, point.torque_force_max),
+    sprites = data.sprites
+  })
 
-  unit:set_position(pos)
-  unit.velocity = vmath.vector3(math.cos(math.rad(angle)), math.sin(math.rad(angle)), 0) * force
-  unit.torque = torque_force
-
+  msg.post(msg.url(nil, unit.view, "sprite"), "play_animation", { id = data.sprites.entire })
   table.insert(self.units, unit)
 end
 
