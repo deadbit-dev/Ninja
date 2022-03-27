@@ -37,26 +37,6 @@ instances {
     z: 1.0
   }
 }
-instances {
-  id: "background"
-  prototype: "/prefabs/background.go"
-  position {
-    x: 0.0
-    y: 0.0
-    z: -1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
 scale_along_z: 0
 embedded_instances {
   id: "ui"
@@ -94,10 +74,11 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "entry_point"
+  id: "world"
+  children: "entities"
   data: "components {\n"
   "  id: \"entry_point\"\n"
-  "  component: \"/code/scripts/entry_point.script\"\n"
+  "  component: \"/code/scripts/game.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -129,9 +110,11 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "entity"
+  id: "entities"
+  children: "bg"
+  children: "camera"
   children: "slicer"
-  children: "unit"
+  children: "spawner"
   data: ""
   position {
     x: 0.0
@@ -225,7 +208,7 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "unit"
+  id: "spawner"
   data: "embedded_components {\n"
   "  id: \"factory\"\n"
   "  type: \"factory\"\n"
@@ -249,6 +232,46 @@ embedded_instances {
     x: 0.0
     y: 0.0
     z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "bg"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/resources/textures/gui.atlas\\\"\\n"
+  "default_animation: \\\"bg_game\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: -1.0
   }
   rotation {
     x: 0.0
