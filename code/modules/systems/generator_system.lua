@@ -6,7 +6,7 @@ local Math = require "code.modules.utils.math"
 local GeneratorSystem = class("GeneratorSystem")
 
 function GeneratorSystem:initialize(config)
-  self.packs = config.SPAWN_PACK
+  self.packs = config.SPAWN_PACKS
   self.units = config.UNITS
   self.delay_pack = self.packs["1"].delay or 0
   self.duration_pack = self.packs["1"].duration or 0
@@ -24,7 +24,7 @@ function GeneratorSystem:update(dt)
   end
 
   self.timer = 0
-  
+
   if self.counter_unit == self.unit_by_pack then
     self.counter_pack = self.counter_pack + 1
 
@@ -42,10 +42,8 @@ function GeneratorSystem:update(dt)
     self.counter_unit = self.counter_unit + 1
     self.delay = self.duration_pack / self.unit_by_pack
   end
- 
-  EventBus:emit(Events.ON_GENERATED, {
-    unit = Math:get_random_value(self.units)
-  })
+
+  EventBus:emit(Events.ON_GENERATED, Math:get_random_value(self.units))
 end
 
 return GeneratorSystem
