@@ -20,16 +20,7 @@ config.SPAWN_ZONES = {
   )
 }
 
-config.UNITS = {
-  { view = hash("apple") },
-  { view = hash("cherry") },
-  { view = hash("limon") },
-  { view = hash("pear") },
-  { view = hash("strawberry") },
-  { view = hash("watermelon") }
-}
-
-config.SPAWN_PACK = {
+config.SPAWN_PACKS = {
   ["1"] = { delay = 3, duration = 1, units = 1 },
   ["3"] = { units = 2 },
   ["5"] = { units = 3 },
@@ -37,15 +28,61 @@ config.SPAWN_PACK = {
   ["20"] = { delay = 1 }
 }
 
-config.GAMEFIELD = {
-  camera = require "orthographic.camera",
-  camera_id = hash("/camera")
+config.UNITS = {
+  { sprites = {
+      entire = hash("apple"),
+      partA = hash("apple_partA"),
+      partB = hash("apple_partB")
+    }
+  },
+  { sprites = {
+      entire = hash("cherry"),
+      partA = hash("cherry_partA"),
+      partB = hash("cherry_partB")
+    }
+  },
+  { sprites = {
+      entire = hash("limon"),
+      partA = hash("limon_partA"),
+      partB = hash("limon_partB")
+    }
+  },
+  { sprites = {
+      entire = hash("pear"),
+      partA = hash("pear_partA"),
+      partB = hash("pear_partB")
+    }
+  },
+  { sprites = {
+      entire = hash("strawberry"),
+      partA = hash("strawberry_partA"),
+      partB = hash("strawberry_partB")
+    }
+  },
+  { sprites = {
+      entire = hash("watermelon"),
+      partA = hash("watermelon_partA"),
+      partB = hash("watermelon_partB")
+    }
+  }
+}
+
+config.SPAWNER = "spawner#factory"
+
+config.CAMERA = {
+  id = hash("/camera"),
+  bihavour = require "orthographic.camera"
 }
 
 config.SLICER = Slicer({
   view = "slicer",
   min_speed_for_slice = 10,
-  radius = 5
+  radius = 5,
 })
+
+config.SLICE_FORCE = 25
+
+config.GRAVITY = 9.8
+config.GRAVITY_AXIS = vmath.vector3(0, -1, 0)
 
 return config
