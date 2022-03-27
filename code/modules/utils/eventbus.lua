@@ -1,10 +1,9 @@
-local class = require "code.modules.utils.middleclass"
-local EventBus = class('EventBus')
+local EventBus = {}
 
-EventBus.static.event_storage = {}
-EventBus.static.handler_storage = {}
+EventBus.event_storage = {}
+EventBus.handler_storage = {}
 
-function EventBus.static:subscribe(event_id, subscriber, context)
+function EventBus:subscribe(event_id, subscriber, context)
   if not EventBus.event_storage[event_id] then 
     EventBus.event_storage[event_id] = {}
   end
@@ -16,7 +15,7 @@ function EventBus.static:subscribe(event_id, subscriber, context)
   end
 end
 
-function EventBus.static:unsubscribe(event_id, subscriber)
+function EventBus:unsubscribe(event_id, subscriber)
   local subscribers = EventBus.event_storage[event_id]
 
   if not subscribers then
@@ -30,7 +29,7 @@ function EventBus.static:unsubscribe(event_id, subscriber)
   end
 end
 
-function EventBus.static:emit(event_id, data)
+function EventBus:emit(event_id, data)
   local subscribers = EventBus.event_storage[event_id]
 
   if not subscribers then
