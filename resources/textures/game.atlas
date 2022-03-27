@@ -1,33 +1,81 @@
 images {
-  image: "/resources/textures/source/game/apple.png"
+  image: "/resources/textures/source/game/apple/apple.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/strawberry.png"
+  image: "/resources/textures/source/game/strawberry/strawberry.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/cherry.png"
+  image: "/resources/textures/source/game/cherry/cherry.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/limon.png"
+  image: "/resources/textures/source/game/limon/limon.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/pear.png"
+  image: "/resources/textures/source/game/pear/pear.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/watermelon.png"
+  image: "/resources/textures/source/game/watermelon/watermelon.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/splatter_0.png"
+  image: "/resources/textures/source/game/splatters/splatter_0.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/splatter_1.png"
+  image: "/resources/textures/source/game/splatters/splatter_1.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/apple/apple_left.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/apple/apple_right.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/cherry/cherry_left.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/cherry/cherry_right.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/limon/limon_left.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/limon/limon_right.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/pear/pear_left.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/pear/pear_right.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/strawberry/strawberry_left.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/strawberry/strawberry_right.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/watermelon/watermelon_left.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/resources/textures/source/game/watermelon/watermelon_right.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
