@@ -1,32 +1,32 @@
-local Spawn = require "code.modules.utils.spawn"
+local Spawn = require "code.modules.entities.spawn"
 local Slicer = require "code.modules.entities.slicer"
 local config = {}
 
 config.SPAWN_ZONES = {
   Spawn.Zone(
-    Spawn.Point(vmath.vector3(0.0, 0.0, 0), 65, 300, 350), 
-    Spawn.Point(vmath.vector3(1.0, 0.0, 0), 115, 300, 350),
+    Spawn.Point(vmath.vector3(0.0, 0.0, 0), 65, 500, 550), 
+    Spawn.Point(vmath.vector3(1.0, 0.0, 0), 115, 500, 550),
     60
   ),
   Spawn.Zone(
-    Spawn.Point(vmath.vector3(0.0, 0.0, 0), 65, 300, 350), 
-    Spawn.Point(vmath.vector3(0.0, 0.25, 0), 35, 250, 300),
+    Spawn.Point(vmath.vector3(0.0, 0.0, 0), 65, 500, 550), 
+    Spawn.Point(vmath.vector3(0.0, 0.25, 0), 35, 450, 500),
     20
   ),
   Spawn.Zone(
-    Spawn.Point(vmath.vector3(1.0, 0.0, 0), 115, 300, 350), 
-    Spawn.Point(vmath.vector3(1.0, 0.25, 0), 145, 250, 300),
+    Spawn.Point(vmath.vector3(1.0, 0.0, 0), 115, 500, 550), 
+    Spawn.Point(vmath.vector3(1.0, 0.25, 0), 145, 450, 500),
     20
   )
 }
 
 config.UNITS = {
-  { id = "apple"},
-  { id = "cherry"},
-  { id = "limon"},
-  { id = "pear"},
-  { id = "strawberry"},
-  { id = "watermelon"}
+  { view = hash("apple") },
+  { view = hash("cherry") },
+  { view = hash("limon") },
+  { view = hash("pear") },
+  { view = hash("strawberry") },
+  { view = hash("watermelon") }
 }
 
 config.SPAWN_PACK = {
@@ -43,7 +43,7 @@ config.GAMEFIELD = {
 }
 
 config.SLICER = Slicer({
-  id = hash("slicer"),
+  view = "slicer",
   min_speed_for_slice = 10,
   radius = 5
 })
