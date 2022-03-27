@@ -9,10 +9,16 @@ function Unit:initialize(args)
   self.position = args.position or vmath.vector3()
   self.rotation = args.rotation or vmath.vector3()
   self.scale = args.scale or vmath.vector3(1)
-  self.velocity = args.velocity or vmath.vector3()
-  self.mass = args.mass or DEFAULT_MASS
   self.radius = args.radius or DEFAULT_RADIUS
+  self.mass = args.mass or DEFAULT_MASS
+  self.velocity = args.velocity or vmath.vector3()
   self.torque = args.torque or 0
+  self.sprites = args.sprites
+  self.slicingable = args.slicingable or false
+
+  go.set_position(self.position, self.view)
+  go.set(self.view, "euler", self.rotation)
+  go.set_scale(self.scale, self.view)
 end
 
 function Unit:set_position(position)
