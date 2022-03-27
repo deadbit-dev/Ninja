@@ -6,9 +6,7 @@ local monarch = require "monarch.monarch"
 go.property("scene", hash(""))
 
 function init(self)
-	self.id = go.get_id()
-	
-	EventBus:subscribe(Events.ON_LOAD, self.id)
+	EventBus:subscribe(Events.ON_LOAD, msg.url(go.get_id()))
 	EventBus:emit(Events.ON_LOAD, {data = self.scene})
 end
 
