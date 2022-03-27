@@ -31,51 +31,51 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/apple/apple_left.png"
+  image: "/resources/textures/source/game/apple/apple_partA.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/apple/apple_right.png"
+  image: "/resources/textures/source/game/apple/apple_partB.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/cherry/cherry_left.png"
+  image: "/resources/textures/source/game/cherry/cherry_partA.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/cherry/cherry_right.png"
+  image: "/resources/textures/source/game/cherry/cherry_partB.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/limon/limon_left.png"
+  image: "/resources/textures/source/game/limon/limon_partA.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/limon/limon_right.png"
+  image: "/resources/textures/source/game/limon/limon_partB.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/pear/pear_left.png"
+  image: "/resources/textures/source/game/pear/pear_partB.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/pear/pear_right.png"
+  image: "/resources/textures/source/game/pear/pear_partA.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/strawberry/strawberry_left.png"
+  image: "/resources/textures/source/game/strawberry/strawberry_partA.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/strawberry/strawberry_right.png"
+  image: "/resources/textures/source/game/strawberry/strawberry_partB.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/watermelon/watermelon_left.png"
+  image: "/resources/textures/source/game/watermelon/watermelon_partB.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/watermelon/watermelon_right.png"
+  image: "/resources/textures/source/game/watermelon/watermelon_partA.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
