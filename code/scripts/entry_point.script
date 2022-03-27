@@ -12,12 +12,12 @@ local SliceSystem = require "code.modules.systems.slice_system"
 function init(self)
   self.systems = {
     InputSystem(),
-    GravitySystem(state.context.units),
-    TorqueSystem(state.context.units),
-    GameFieldSystem(config.GAMEFIELD, state.context.units),
-    GeneratorSystem(config.UNITS, config.SPAWN_PACK),    
-    SpawnSystem(config.SPAWN_ZONES, config.GAMEFIELD, state.context.units),
-    SliceSystem(config.SLICER, state.context.units, config.GAMEFIELD)
+    GravitySystem(state),
+    TorqueSystem(state),
+    GameFieldSystem(state, config),
+    GeneratorSystem(config),    
+    SpawnSystem(state, config),
+    SliceSystem(state, config)
   }
   
   msg.post(".", "acquire_input_focus")
