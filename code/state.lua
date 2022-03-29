@@ -2,6 +2,7 @@ local config = require "code.config"
 local state = {}
 
 state.context = {
+  background = "bg",
   camera = {
     id = hash("/camera"),
     behaviour = require ("orthographic.camera")
@@ -20,7 +21,9 @@ state.context = {
     radius = 5
   }),
   splatters = {},
-  units = {}
+  units = {},
+  health = config.health,
+  score = 0
 }
 
 return state
