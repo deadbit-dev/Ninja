@@ -14,7 +14,8 @@ function init(self)
     require ("code.modules.systems.generator")(self.state, self.eventbus),
     require ("code.modules.systems.spawn")(self.state, self.eventbus),
     require ("code.modules.systems.slice")(self.state, self.eventbus),
-    require ("code.modules.systems.effect")(self.state, self.eventbus)
+    require ("code.modules.systems.effect")(self.state, self.eventbus),
+    require ("code.modules.systems.background")(self.state)
   }
 
   msg.post(".", "acquire_input_focus")
