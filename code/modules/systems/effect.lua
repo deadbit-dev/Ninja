@@ -8,7 +8,11 @@ function EffectSystem:initialize(state, eventbus)
   self.spawner = state.context.spawner
   self.splatters = state.context.splatters
 
-  self.eventbus.arbiter:subscribe(self.eventbus.events.ON_SLICED, self.splatter, self)
+  self.eventbus.arbiter:subscribe(self.eventbus.events.ON_SLICED, self.effector, self)
+end
+
+function EffectSystem:effector(data)
+  self:splatter(data)
 end
 
 function EffectSystem:splatter(data)
