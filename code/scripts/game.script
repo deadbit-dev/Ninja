@@ -1,23 +1,20 @@
-local config = require "code.config"
-local state = require "code.state"
-
-local InputSystem = require "code.modules.systems.input_system"
-local GravitySystem = require "code.modules.systems.gravity_system"
-local TorqueSystem = require "code.modules.systems.torque_system"
-local GameFieldSystem = require "code.modules.systems.gamefield_system"
-local GeneratorSystem = require "code.modules.systems.generator_system"
-local SpawnSystem = require "code.modules.systems.spawn_system"
-local SliceSystem = require "code.modules.systems.slice_system"
-
 function init(self)
+  self.state = require ("code.state")
+
+  self.eventbus = {
+    events = require ("code.events"),
+    arbiter = require ("code.modules.utils.eventbus")
+  }
+
   self.systems = {
-    InputSystem(),
-    GravitySystem(state, config),
-    TorqueSystem(state),
-    GameFieldSystem(state, config),
-    GeneratorSystem(config),    
-    SpawnSystem(state, config),
-    SliceSystem(state, config)
+    require ("code.modules.systems.input")(self.eventbus),
+    require ("code.modules.systems.gravity")(self.state),
+    require ("code.modules.systems.torque")(self.state),
+    require ("code.modules.systems.gamefield")(self.state, self.eventbus),
+    require ("code.modules.systems.generator")(self.state, self.eventbus),
+    require ("code.modules.systems.spawn")(self.state, self.eventbus),
+    require ("code.modules.systems.slice")(self.state, self.eventbus),
+    require ("code.modules.systems.effect")(self.state, self.eventbus)
   }
 
   msg.post(".", "acquire_input_focus")

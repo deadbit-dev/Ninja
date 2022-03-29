@@ -1,19 +1,17 @@
 local class = require "code.modules.utils.middleclass"
 local Unit = class('unit')
 
-local DEFAULT_RADIUS = 40
-local DEFAULT_MASS = 50
-
-function Unit:initialize(args)
-  self.view = args.view
+function Unit:initialize(view, args)
+  self.view = view
   self.position = args.position or vmath.vector3()
   self.rotation = args.rotation or vmath.vector3()
   self.scale = args.scale or vmath.vector3(1)
-  self.radius = args.radius or DEFAULT_RADIUS
-  self.mass = args.mass or DEFAULT_MASS
+  self.radius = args.radius or 0
+  self.mass = args.mass or 0
   self.velocity = args.velocity or vmath.vector3()
   self.torque = args.torque or 0
   self.sprites = args.sprites
+  self.color = args.color
   self.slicingable = args.slicingable or false
 
   go.set_position(self.position, self.view)

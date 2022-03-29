@@ -1,13 +1,13 @@
 local class = require "code.modules.utils.middleclass"
 local GameFieldSystem = class("GameFieldSystem")
 
-function GameFieldSystem:initialize(state, config)
-  self.camera = config.CAMERA
+function GameFieldSystem:initialize(state)
+  self.camera = state.context.camera
   self.units = state.context.units
 end
 
 function GameFieldSystem:update(dt)
-  local bounds = self.camera.bihavour.screen_to_world_bounds(self.camera.id) 
+  local bounds = self.camera.behaviour.screen_to_world_bounds(self.camera.id)
 
   for index, unit in ipairs(self.units) do
     if self:unit_exit_bounds(unit, bounds) then

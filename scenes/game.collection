@@ -16,6 +16,16 @@ instances {
   component_properties {
     id: "script"
     properties {
+      id: "near_z"
+      value: "-1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "far_z"
+      value: "10.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
       id: "projection"
       value: "FIXED_AUTO"
       type: PROPERTY_TYPE_HASH
@@ -271,7 +281,7 @@ embedded_instances {
   position {
     x: 0.0
     y: 0.0
-    z: -1.0
+    z: -10.0
   }
   rotation {
     x: 0.0

@@ -1,11 +1,10 @@
 local class = require "code.modules.utils.middleclass"
-local Events = require "code.events"
-local EventBus = require "code.modules.utils.eventbus"
 local InputSystem = class("InputSystem")
 
 local TOUCH = hash("touch")
 
-function InputSystem:initialize()
+function InputSystem:initialize(eventbus)
+  self.eventbus = eventbus
   self.pressed = false
 end
 
@@ -15,14 +14,14 @@ function InputSystem:on_input(action_id, action)
 
     if action.pressed then
       self.pressed = true
-      EventBus:emit(Events.ON_TOUCH_START, {pos = action_pos})
+      self.eventbus.arbiter:emit(self.eventbus.events.ON_TOUCH_START, {pos = action_pos})
     elseif action.released then
       self.pressed = false
-      EventBus:emit(Events.ON_TOUCH_END, {pos = action_pos})
+      self.eventbus.arbiter:emit(self.eventbus.events.ON_TOUCH_END, {pos = action_pos})
     end
 
     if self.pressed then
-      EventBus:emit(Events.ON_TOUCH_PROCESS, {pos = action_pos})
+      self.eventbus.arbiter:emit(self.eventbus.events.ON_TOUCH_PROCESS, {pos = action_pos})
     end
   end
 end
