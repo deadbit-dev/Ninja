@@ -3,7 +3,7 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/strawberry/strawberry.png"
+  image: "/resources/textures/source/game/heart/heart.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
@@ -63,11 +63,11 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/strawberry/strawberry_partA.png"
+  image: "/resources/textures/source/game/heart/heart_partA.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/resources/textures/source/game/strawberry/strawberry_partB.png"
+  image: "/resources/textures/source/game/heart/heart_partB.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
