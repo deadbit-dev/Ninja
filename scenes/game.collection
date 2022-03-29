@@ -40,6 +40,11 @@ instances {
       value: "false"
       type: PROPERTY_TYPE_BOOLEAN
     }
+    properties {
+      id: "follow_lerp"
+      value: "0.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
   }
   scale3 {
     x: 1.0
