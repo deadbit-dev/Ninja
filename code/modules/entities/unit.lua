@@ -12,7 +12,7 @@ function Unit:initialize(view, args)
   self.torque = args.torque or 0
   self.sprites = args.sprites
   self.color = args.color
-  self.slicingable = args.slicingable or false
+  self.sliced = args.sliced or false
 
   go.set_position(self.position, self.view)
   go.set(self.view, "euler", self.rotation)

@@ -22,7 +22,7 @@ function SliceSystem:update(dt)
   end
 
   for index, unit in ipairs(self.units) do
-    if self:inside_unit(unit) and not unit.slicingable then
+    if self:inside_unit(unit) and not unit.sliced then
       local position = unit.position
       local rotation = unit.rotation
       local velocity = unit.velocity
@@ -36,7 +36,7 @@ function SliceSystem:update(dt)
         torque = torque,
         radius = unit.radius,
         mass = unit.mass / 2,
-        slicingable = true
+        sliced = true
       })
 
       local sprite = msg.url(nil, part.view, "sprite")
@@ -50,7 +50,7 @@ function SliceSystem:update(dt)
         torque = torque,
         radius = unit.radius,
         mass = unit.mass / 2,
-        slicingable = true
+        sliced = true
       })
 
       sprite = msg.url(nil, part.view, "sprite")
