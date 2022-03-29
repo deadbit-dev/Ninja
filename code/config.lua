@@ -27,8 +27,8 @@ config.SPAWN_ZONES = {
   )
 }
 
-local DEFAULT_RADIUS = 40
-local DEFAULT_MASS = 50
+local DEFAULT_UNIT_RADIUS = 40
+local DEFAULT_UNIT_MASS = 50
 
 config.SPAWN_UNITS = {
   {
@@ -38,8 +38,8 @@ config.SPAWN_UNITS = {
       partB = hash("apple_partB")
     },
     color = vmath.vector4(0, 1, 0, 1),
-    radius = DEFAULT_RADIUS,
-    mass = DEFAULT_MASS
+    radius = DEFAULT_UNIT_RADIUS,
+    mass = DEFAULT_UNIT_MASS
   },
   {
     sprites = {
@@ -48,8 +48,8 @@ config.SPAWN_UNITS = {
       partB = hash("cherry_partB")
     },
     color = vmath.vector4(1, 0, 0, 1),
-    radius = DEFAULT_RADIUS,
-    mass = DEFAULT_MASS
+    radius = DEFAULT_UNIT_RADIUS,
+    mass = DEFAULT_UNIT_MASS
   },
   {
     sprites = {
@@ -58,8 +58,8 @@ config.SPAWN_UNITS = {
       partB = hash("limon_partB")
     },
     color = vmath.vector4(1, 1, 0, 1),
-    radius = DEFAULT_RADIUS,
-    mass = DEFAULT_MASS
+    radius = DEFAULT_UNIT_RADIUS,
+    mass = DEFAULT_UNIT_MASS
   },
   {
     sprites = {
@@ -68,18 +68,8 @@ config.SPAWN_UNITS = {
       partB = hash("pear_partB")
     },
     color = vmath.vector4(1, 1, 0, 1),
-    radius = DEFAULT_RADIUS,
-    mass = DEFAULT_MASS
-  },
-  {
-    sprites = {
-      entire = hash("strawberry"),
-      partA = hash("strawberry_partA"),
-      partB = hash("strawberry_partB")
-    },
-    color = vmath.vector4(1, 0, 0, 1),
-    radius = DEFAULT_RADIUS,
-    mass = DEFAULT_MASS
+    radius = DEFAULT_UNIT_RADIUS,
+    mass = DEFAULT_UNIT_MASS
   },
   {
     sprites = {
@@ -88,8 +78,19 @@ config.SPAWN_UNITS = {
       partB = hash("watermelon_partB")
     },
     color = vmath.vector4(1, 0, 0, 1),
-    radius = DEFAULT_RADIUS,
-    mass = DEFAULT_MASS
+    radius = 60,
+    mass = DEFAULT_UNIT_MASS
+  },
+  {
+    sprites = {
+      entire = hash("heart"),
+      partA = hash("heart_partA"),
+      partB = hash("heart_partB")
+    },
+    color = vmath.vector4(1, 0, 0, 1),
+    radius = DEFAULT_UNIT_RADIUS,
+    mass = DEFAULT_UNIT_MASS,
+    weight = 0.3
   }
 }
 
@@ -98,12 +99,18 @@ config.SPLATTERS = {
   hash("splatter_1")
 }
 
+config.WIDTH = 800
+config.HEIGHT = 450
+
+config.MAX_HEALTH = 5
+config.INCRECE_SCORE = 10
+
+config.GRAVITY = 9.8
+config.GRAVITY_AXIS = vmath.vector3(0, -1, 0)
+
 config.SPLATTER_LIFE_TIME = 2.5
 config.SPLATTER_Z = -5
 
 config.SLICE_FORCE = 25
-
-config.GRAVITY = 9.8
-config.GRAVITY_AXIS = vmath.vector3(0, -1, 0)
 
 return config
