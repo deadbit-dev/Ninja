@@ -1,9 +1,9 @@
 local class = require "code.modules.utils.middleclass"
 local GameFieldSystem = class("GameFieldSystem")
 
-function GameFieldSystem:initialize(state)
-  self.camera = state.context.camera
-  self.units = state.context.units
+function GameFieldSystem:initialize(world)
+  self.units = world.state.context.units
+  self.camera = world.entities.camera
 end
 
 function GameFieldSystem:update(dt)

@@ -1,4 +1,4 @@
-script: "/code/gui/scenes/game.gui_script"
+script: "/code/game/game.gui_script"
 fonts {
   name: "ninja"
   font: "/resources/fonts/ninja.font"

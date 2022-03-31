@@ -2,8 +2,8 @@ local class = require "code.modules.utils.middleclass"
 local config = require "code.config"
 local BackgroundSystem = class("BackgroundSystem")
 
-function BackgroundSystem:initialize(state)
-  self.background = state.context.background
+function BackgroundSystem:initialize(world)
+  self.background = world.entities.background
 
   window.set_listener(self.window_callback)
 end

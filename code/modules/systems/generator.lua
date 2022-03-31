@@ -3,14 +3,23 @@ local config = require "code.config"
 local Math = require "code.modules.utils.math"
 local GeneratorSystem = class("GeneratorSystem")
 
-function GeneratorSystem:initialize(state, eventbus)
+function GeneratorSystem:initialize(world, eventbus)
   self.eventbus = eventbus
-  self.generator = state.context.generator
-  self.pack = state.context.pack
+  self.generator = world.state.context.generator
+  self.pack = world.state.context.pack
+
+  local pack = config.PACKS["1"]
+
+  self.pack.delay = pack.delay
+  self.pack.duration = pack.duration
+  self.pack.units = pack.units
+
+  self.generator.delay = self.pack.delay
+  self.generator.counter_pack = 1
+  self.generator.counter_unit = 1
 end
 
 function GeneratorSystem:update(dt)
-
   if self.generator.delay > self.generator.timer then
     self.generator.timer = self.generator.timer + dt
     return
@@ -21,7 +30,7 @@ function GeneratorSystem:update(dt)
   if self.generator.counter_unit == self.pack.units then
     self.generator.counter_pack = self.generator.counter_pack + 1
 
-    local next_pack = config.SPAWN_PACKS[tostring(self.generator.counter_pack)]
+    local next_pack = config.PACKS[tostring(self.generator.counter_pack)]
 
     if next_pack then
       self.pack.delay = next_pack.delay or self.pack.delay
@@ -36,7 +45,10 @@ function GeneratorSystem:update(dt)
     self.generator.delay = self.pack.duration / self.pack.units
   end
 
-  self.eventbus.arbiter:emit(self.eventbus.events.ON_GENERATED, Math:get_random_value(config.SPAWN_UNITS))
+  self.eventbus.arbiter:emit(
+    self.eventbus.events.ON_GENERATED,
+    Math:get_random_value(config.UNITS)
+  )
 end
 
 return GeneratorSystem

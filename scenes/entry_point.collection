@@ -231,7 +231,7 @@ embedded_instances {
   id: "bootloader"
   data: "components {\n"
   "  id: \"bootloader\"\n"
-  "  component: \"/code/scripts/bootloader.script\"\n"
+  "  component: \"/code/bootloader.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"

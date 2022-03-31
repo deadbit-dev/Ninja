@@ -1,12 +1,12 @@
 local class = require "code.modules.utils.middleclass"
 local config = require "code.config"
-local Unit = require "code.modules.entities.unit"
+local Effect = require "code.modules.entities.effect"
 local EffectSystem = class("EffectSystem")
 
-function EffectSystem:initialize(state, eventbus)
+function EffectSystem:initialize(world, eventbus)
   self.eventbus = eventbus
-  self.spawner = state.context.spawner
-  self.splatters = state.context.splatters
+  self.effects = world.state.context.effects
+  self.spawner = world.entities.spawner
 
   self.eventbus.arbiter:subscribe(self.eventbus.events.ON_SLICED, self.effector, self)
 end
@@ -16,18 +16,16 @@ function EffectSystem:effector(data)
 end
 
 function EffectSystem:splatter(data)
-  local splatter = Unit(factory.create(self.spawner), {
+  local splatter = Effect(factory.create(self.spawner), {
     position = vmath.vector3(data.position.x, data.position.y, config.SPLATTER_Z),
-    rotation = vmath.vector3(0, 0, math.random(0, 360))
+    rotation = vmath.vector3(0, 0, math.random(0, 360)),
+    sprite = config.SPLATTERS[math.random(1, #config.SPLATTERS)]
   })
 
-  local index = #self.splatters + 1
-  table.insert(self.splatters, index, splatter)
+  local index = #self.effects + 1
+  table.insert(self.effects, index, splatter)
 
-  local sprite = msg.url(nil, splatter.view, "sprite")
-  msg.post(sprite, "play_animation", {
-    id = config.SPLATTERS[math.random(1, #config.SPLATTERS)]
-  })
+  local sprite = msg.url(nil, splatter.id, "sprite")
 
   go.set(sprite, "tint", data.color)
   go.animate(
@@ -40,7 +38,7 @@ function EffectSystem:splatter(data)
     0,
     function()
       splatter:finalize()
-      table.remove(self.splatters, index)
+      table.remove(self.effects, index)
     end
   )
 end

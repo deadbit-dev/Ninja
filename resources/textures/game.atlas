@@ -78,6 +78,10 @@ images {
   image: "/resources/textures/source/game/watermelon/watermelon_partA.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
+images {
+  image: "/resources/textures/source/game/bomb/bomb.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
 margin: 0
 extrude_borders: 2
 inner_padding: 0

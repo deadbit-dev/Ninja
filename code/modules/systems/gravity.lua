@@ -2,8 +2,8 @@ local class = require "code.modules.utils.middleclass"
 local config = require "code.config"
 local GravitySystem = class("GravitySystem")
 
-function GravitySystem:initialize(state)
-  self.units = state.context.units
+function GravitySystem:initialize(world)
+  self.units = world.state.context.units
 end
 
 function GravitySystem:update(dt)
