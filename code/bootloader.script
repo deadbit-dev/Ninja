@@ -1,12 +1,12 @@
-local events = require "code.events"
-local eventBus = require "code.modules.utils.eventbus"
 local monarch = require "monarch.monarch"
+local EventBus = require "code.modules.utils.eventbus"
+local events = require "code.events"
 
 go.property("scene", hash(""))
 
 function init(self)
-	eventBus:subscribe(events.ON_LOAD, msg.url(go.get_id()))
-	eventBus:emit(events.ON_LOAD, {data = self.scene})
+	EventBus:subscribe(events.ON_LOAD, msg.url(go.get_id()))
+	EventBus:emit(events.ON_LOAD, {data = self.scene})
 end
 
 function on_message(self, message_id, message)

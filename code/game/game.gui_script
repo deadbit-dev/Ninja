@@ -1,0 +1,15 @@
+local EventBus = require "code.modules.utils.eventbus"
+local events = require "code.events"
+local state = require "code.game.state"
+
+function init(self)
+  self.current = state.context.scores.current
+  self.best = state.context.scores.best
+  self.score_node = gui.get_node("score")
+
+  EventBus:subscribe(events.ON_SCORED, self.add_score, self)
+end
+
+function add_score(self, data)
+  print("SCORE")
+end

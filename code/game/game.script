@@ -1,0 +1,42 @@
+function init(self)
+  self.eventbus = {
+    events = require ("code.events"),
+    arbiter = require ("code.modules.utils.eventbus")
+  }
+
+  self.world = {
+    state = require ("code.game.state"),
+    entities = require ("code.game.entities")
+  }
+
+  self.systems = {
+    require ("code.modules.systems.input")(self.eventbus),
+    require ("code.modules.systems.gravity")(self.world),
+    require ("code.modules.systems.torque")(self.world),
+    require ("code.modules.systems.background")(self.world),
+    require ("code.modules.systems.effect")(self.world, self.eventbus),
+    require ("code.modules.systems.gamefield")(self.world, self.eventbus),
+    require ("code.modules.systems.generator")(self.world, self.eventbus),
+    require ("code.modules.systems.spawn")(self.world, self.eventbus),
+    require ("code.modules.systems.slice")(self.world, self.eventbus),
+    require ("code.modules.systems.score")(self.world, self.eventbus)
+  }
+
+  msg.post(".", "acquire_input_focus")
+end
+
+function update(self, dt)
+  for i=1, #self.systems do
+    if self.systems[i].update then
+      self.systems[i]:update(dt)
+    end
+  end
+end
+
+function on_input(self, action_id, action)
+  for i=1, #self.systems do
+    if self.systems[i].on_input then
+      self.systems[i]:on_input(action_id, action)
+    end
+  end
+end
